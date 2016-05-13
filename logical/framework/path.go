@@ -19,6 +19,12 @@ func PathAppend(paths ...[]*Path) []*Path {
 	return result
 }
 
+// Helper which returns a generic regex string for creating endpoint patterns
+// that are identified by the given name in the backends
+func GenericNameRegex(name string) string {
+	return fmt.Sprintf("(?P<%s>\\w[\\w-]+\\w?)", name)
+}
+
 // Path is a single path that the backend responds to.
 type Path struct {
 	// Pattern is the pattern of the URL that matches this path.

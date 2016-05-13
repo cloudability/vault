@@ -27,6 +27,8 @@ import (
 	"github.com/hashicorp/vault/command"
 	"github.com/hashicorp/vault/logical"
 	"github.com/mitchellh/cli"
+
+	"github.com/hashicorp/vault/addon/logical/awssignature"
 )
 
 // Commands returns the mapping of CLI commands for Vault. The meta
@@ -66,13 +68,14 @@ func Commands(metaPtr *command.Meta) map[string]cli.CommandFactory {
 					"ldap":     credLdap.Factory,
 				},
 				LogicalBackends: map[string]logical.Factory{
-					"aws":        aws.Factory,
-					"consul":     consul.Factory,
-					"postgresql": postgresql.Factory,
-					"cassandra":  cassandra.Factory,
-					"pki":        pki.Factory,
-					"transit":    transit.Factory,
-					"mysql":      mysql.Factory,
+					"aws":          aws.Factory,
+					"awssignature": awssignature.Factory,
+					"consul":       consul.Factory,
+					"postgresql":   postgresql.Factory,
+					"cassandra":    cassandra.Factory,
+					"pki":          pki.Factory,
+					"transit":      transit.Factory,
+					"mysql":        mysql.Factory,
 				},
 				ShutdownCh: makeShutdownCh(),
 			}, nil
